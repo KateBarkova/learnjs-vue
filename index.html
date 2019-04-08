@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue LearnJS Баркова</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <style>
+      [v-cloak] { 
+        display: none
+      }
+    </style>
+
+    <div id="app" v-cloak>
+      <h3>Таблица очень серьезных людей в количестве {{ getNumberOfUsers }} человек</h3>
+      <button 
+        type="button" 
+        @click="changeState()" 
+        v-tooltip.right-end="`Кликни на меня`"
+      > 
+        {{ isShow ? 'С глаз долой' : 'Явите миру' }} 
+      </button>
+      <table 
+        v-show="isShow" 
+        class="table"
+      >
+        <tr>
+          <td><b>Аватар</b></td>
+          <td><b>Фамилия</b></td>
+          <td><b>Имя</b></td>
+          <td><b>Отчество</b></td>  
+        </tr>
+        <tr 
+          v-for="item in items" 
+          :key="item.id"
+        >
+          <td><img :src="item.src || defaultImage" /></td>
+          <td>{{ item.surname | toUpperCase(item.surname) }}</td>
+          <td>{{ item.name | toUpperCase(item.surname) }}</td>
+          <td>{{ item.middlename | toUpperCase(item.surname) }}</td>
+          <td>
+            <button 
+              type="button" 
+              @click="copySurname(item.surname)"
+            >
+              Copy!
+            </button>
+          </td>
+        </tr>
+      </table>
+      
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/v-tooltip"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/v-copy"></script>
+     -->
+    <script type="text/javascript">
+
+      Vue.use(VTooltip);
+      // Vue.use(Copy);
+
+      var items = [
+        {
+          name: 'Иван',
+          middlename: 'Иванович',
+          surname: 'Иванов',
+          src: 'http://www.mobilmusic.ru/mfile/20/84/b8/1238364-100.jpg'
+        },
+        {
+          name: 'Петр',
+          middlename: 'Петрович',
+          surname: 'Петров',
+          src: 'https://pp.userapi.com/c847121/v847121237/12c354/WSucko6HEo0.jpg'
+        },
+        {
+          name: 'Сергей',
+          middlename: 'Сергеевич',
+          surname: 'Сергеев',
+          src: ''
+        },
+        {
+          name: 'Алексей',
+          middlename: 'Алексеевич',
+          surname: 'Алексеев',
+          src: ''
+        },
+        {
+          name: 'Екатерина',
+          middlename: 'Игоревна',
+          surname: 'Баркова',
+          src: 'https://ru-static.z-dn.net/files/d50/0ae5205ba1e6307cfdc04f0d0c57195a.png'
+        },
+      ]
+
+      var app = new Vue({
+        el: '#app',
+        data: {
+          items,
+          defaultImage: 'https://pp.userapi.com/c840437/v840437340/17884/5EaHPS47W9c.jpg',
+          isShow: false
+        },
+        computed: {
+          getNumberOfUsers() {
+            return items.length
+          }
+        },
+        methods: {
+          changeState() {
+            this.isShow = !this.isShow;
+          },
+          copySurname(surname) {
+            console.log(surname);
+          }
+        },
+        filters: {
+          toUpperCase(value) {
+            if (value) {
+              value = value.toString()
+              return value.toUpperCase()
+            }
+            return
+          }
+        }
+      })
+    </script>
+  </body>
+  
+</html>

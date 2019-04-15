@@ -19,10 +19,10 @@
         @click="changeState()" 
         v-tooltip.right-end="`Кликни на меня`"
       > 
-        {{ isShow ? 'С глаз долой' : 'Явите миру' }} 
+        {{ btnMessage }} 
       </button>
       <table 
-        v-show="isShow" 
+        v-if="isShow" 
         class="table"
       >
         <tr>
@@ -41,8 +41,9 @@
           <td>{{ item.middlename | toUpperCase(item.surname) }}</td>
           <td>
             <button 
-              type="button" 
-              @click="copySurname(item.surname)"
+              type="button"
+              v-copy="item.surname"
+              v-copy:callback="copySurname"
             >
               Copy!
             </button>
@@ -55,14 +56,13 @@
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/v-tooltip"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/v-copy"></script>
-     -->
+    <script src="https://cdn.jsdelivr.net/npm/v-copy"></script>
+    
     <script type="text/javascript">
 
       Vue.use(VTooltip);
-      // Vue.use(Copy);
 
-      var items = [
+      var list = [
         {
           name: 'Иван',
           middlename: 'Иванович',
@@ -97,15 +97,25 @@
 
       var app = new Vue({
         el: '#app',
-        data: {
-          items,
-          defaultImage: 'https://pp.userapi.com/c840437/v840437340/17884/5EaHPS47W9c.jpg',
-          isShow: false
+        data: function() {
+          return {
+            items: [],
+            defaultImage: 'https://pp.userapi.com/c840437/v840437340/17884/5EaHPS47W9c.jpg',
+            isShow: false
+          }  
         },
         computed: {
           getNumberOfUsers() {
-            return items.length
-          }
+            if (this.items) {
+              return this.items.length
+            }
+          },
+          btnMessage() {
+            return this.isShow ? 'С глаз долой' : 'Явите миру'
+          },
+        },
+        created() {
+          this.items = list;
         },
         methods: {
           changeState() {
@@ -121,7 +131,7 @@
               value = value.toString()
               return value.toUpperCase()
             }
-            return
+            return value
           }
         }
       })

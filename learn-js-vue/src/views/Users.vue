@@ -2,13 +2,15 @@
   <div>
     <h3>Список пользователей</h3>
     <p>Количество пользователей - {{ getNumberOfUsers }}</p>
-    <div v-if="!items.length" class="alert alert-warning">Идет загрузка...</div>
-    <user-list v-else :items="items"></user-list>
+    <div v-if="!items.length" class="alert alert-warning">
+      Идет загрузка...
+    </div>
+    <user-list v-else :items="items" />
   </div>
 </template>
 
 <script>
-import axios from '@/axios.js';
+import axios from "@/axios.js";
 
 export default {
   name: "UserPage",
@@ -16,7 +18,7 @@ export default {
     items: []
   }),
   components: {
-    UserList: () => import('@/components/UserList.vue')
+    UserList: () => import("@/components/UserList.vue")
   },
   computed: {
     getNumberOfUsers() {
@@ -34,13 +36,12 @@ export default {
       console.log("Данные загружены");
       console.log(newValue);
     }
-	},
-	methods: {
+  },
+  methods: {
     loadData() {
-			axios.get('/users')
-				.then(response => {
+      axios.get("/users").then(response => {
         this.items = response.data;
-      })
+      });
     }
   }
 };

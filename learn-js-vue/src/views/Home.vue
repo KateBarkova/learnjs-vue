@@ -5,17 +5,8 @@
 </template>
 
 <script>
-
-
 export default {
   name: "HomePage",
-  data: () => ({
-  }),
-  components: {
-  },
-  computed: {
-  },
-	methods: {
-  }
+  data: () => {}
 };
 </script>

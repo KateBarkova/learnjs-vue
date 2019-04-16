@@ -21,10 +21,14 @@
       > 
         {{ btnMessage }} 
       </button>
-      <table 
-        v-if="isShow" 
-        class="table"
-      >
+
+      <user-list v-if="isShow" :items="items"></user-list>
+      <user-form :items="items"></user-form>
+      
+    </div>
+
+    <template id="table">
+      <table class="table">
         <tr>
           <td><b>Аватар</b></td>
           <td><b>Фамилия</b></td>
@@ -50,8 +54,12 @@
           </td>
         </tr>
       </table>
-      
-    </div>
+    </template>
+
+    <template id="form">
+      <div>Тут будет редактирование</div>
+     
+    </template>
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -95,12 +103,61 @@
         },
       ]
 
+      var userList = {
+        template: '#table',
+        props: {
+          items: {
+            type: Array,
+            required: true
+          }
+        },
+        data: function() {
+          return {
+            defaultImage: 'https://pp.userapi.com/c840437/v840437340/17884/5EaHPS47W9c.jpg',
+          }  
+        },
+        methods: {
+          copySurname(surname) {
+            console.log(surname);
+          }
+        },
+        filters: {
+          toUpperCase(value) {
+            if (value) {
+              value = value.toString()
+              return value.toUpperCase()
+            }
+            return value
+          }
+        }
+      }
+
+      var userForm = {
+        template: '#form',
+        props: {
+          items: {
+            type: Array,
+            required: true
+          }
+        },
+        data: function() {
+          return {
+          }  
+        },
+        methods: {
+          
+        },
+      }
+
       var app = new Vue({
         el: '#app',
+        components: {
+          'user-list': userList,
+          'user-form': userForm,
+        },
         data: function() {
           return {
             items: [],
-            defaultImage: 'https://pp.userapi.com/c840437/v840437340/17884/5EaHPS47W9c.jpg',
             isShow: false
           }  
         },
@@ -117,23 +174,17 @@
         created() {
           this.items = list;
         },
+        watch: {
+          items(newValue) {
+            console.log('Данные загружены');
+            console.log(newValue);
+          }
+        },
         methods: {
           changeState() {
             this.isShow = !this.isShow;
           },
-          copySurname(surname) {
-            console.log(surname);
-          }
         },
-        filters: {
-          toUpperCase(value) {
-            if (value) {
-              value = value.toString()
-              return value.toUpperCase()
-            }
-            return value
-          }
-        }
       })
     </script>
   </body>

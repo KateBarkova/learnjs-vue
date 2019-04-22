@@ -2,42 +2,42 @@
   <div>
     <div class="form-group">
       <label>Имя</label>
-      <input type="text" class="form-control" v-model="localUser.firstName" />
+      <input v-model="localUser.firstName" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Фамилия</label>
-      <input type="text" class="form-control" v-model="localUser.lastName" />
+      <input v-model="localUser.lastName" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Возраст</label>
-      <input type="text" class="form-control" v-model="localUser.age" />
+      <input v-model="localUser.age" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Компания</label>
-      <input type="text" class="form-control" v-model="localUser.company" />
+      <input v-model="localUser.company" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Баланс</label>
-      <input type="text" class="form-control" v-model="localUser.balance" />
+      <input v-model="localUser.balance" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Телефон</label>
-      <input type="text" class="form-control" v-model="localUser.phone" />
+      <input v-model="localUser.phone" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Email</label>
-      <input type="text" class="form-control" v-model="localUser.email" />
+      <input v-model="localUser.email" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Адрес</label>
-      <input type="text" class="form-control" v-model="localUser.address" />
+      <input v-model="localUser.address" type="text" class="form-control" />
     </div>
 
     <div class="form__image-container">
@@ -53,27 +53,27 @@
 
     <div class="form-group">
       <label>Url фото</label>
-      <input type="text" class="form-control" v-model="localUser.picture" />
+      <input v-model="localUser.picture" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>О пользователе</label>
-      <input type="textarea" class="form-control" v-model="localUser.about" />
+      <input v-model="localUser.about" type="textarea" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Дата регистрации</label>
-      <input type="text" class="form-control" v-model="localUser.registered" />
+      <input v-model="localUser.registered" type="text" class="form-control" />
     </div>
 
     <div class="form-group">
-      <input type="checkbox" v-model="localUser.isActive" />
+      <input v-model="localUser.isActive" type="checkbox" />
       <label>Активный пользователь</label>
     </div>
 
     <div class="form-group">
       <label>Уровень доступа</label>
-      <select type="text" class="form-control" v-model="localUser.accessLevel">
+      <select v-model="localUser.accessLevel" type="text" class="form-control">
         <option>guest</option>
         <option>user</option>
         <option>admin</option>
@@ -81,18 +81,6 @@
     </div>
   </div>
 </template>
-
-<style lang="scss">
-.form__image-container {
-  width: 128px;
-  height: 128px;
-  background-color: #828282;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-}
-</style>
 
 <script>
 export default {
@@ -122,3 +110,15 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.form__image-container {
+  width: 128px;
+  height: 128px;
+  background-color: #828282;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+</style>

@@ -2,38 +2,35 @@
   <div>
     <h3>Добавить нового пользователя</h3>
     <user-form v-model="user" />
-    <button type="button" @click="createUser" class="btn btn-primary">
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="createUser"
+    >
       Сохранить
     </button>
-    <button type="button" @click="exit" class="btn btn-primary">
+    <button
+      type="button"
+      class="btn btn-primary"
+      @click="exit"
+    >
       Вернуться без сохранения
     </button>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.btn-primary {
-  margin: 15px;
-}
-</style>
 
 <script>
 import axios from "@/axios.js";
 
 export default {
   name: "UserAdd",
-  props: {},
-  data: () => ({
-    user: {}
-  }),
   components: {
     UserForm: () => import("@/components/UserForm.vue")
   },
-  computed: {
-    url() {
-      return `/users/`;
-    }
-  },
+  data: () => ({
+    user: {},
+    url: `/users/`
+  }),
   methods: {
     createUser() {
       axios
@@ -42,7 +39,7 @@ export default {
           this.$router.push("/users");
         })
         .catch(error => {
-          console.err(error);
+          console.error(error);
         });
     },
     exit() {
@@ -51,3 +48,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.btn-primary {
+  margin: 15px;
+}
+</style>

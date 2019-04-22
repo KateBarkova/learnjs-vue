@@ -12,9 +12,9 @@
     </li>
 
     <li
-      class="page-item"
       v-for="item in maxPages"
       :key="item"
+      class="page-item"
       :class="{ active: page === item }"
     >
       <a href="#" class="page-link" @click.prevent="selectPage(item)">
@@ -77,6 +77,6 @@ export default {
     selectPage(page) {
       this.$emit("input", page);
     }
-  }
+  },
 };
 </script>

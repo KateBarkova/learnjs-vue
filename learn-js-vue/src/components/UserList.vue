@@ -64,6 +64,15 @@ export default {
     Pagination: () => import("@/components/Pagination.vue"),
     ListPerPage: () => import("@/components/ListPerPage.vue")
   },
+  filters: {
+    toUpperCase(value) {
+      if (value) {
+        value = value.toString();
+        return value.toUpperCase();
+      }
+      return value;
+    }
+  },
   props: {
     items: {
       type: Array,
@@ -76,15 +85,6 @@ export default {
     selectedPage: 1,
     loading: false
   }),
-  filters: {
-    toUpperCase(value) {
-      if (value) {
-        value = value.toString();
-        return value.toUpperCase();
-      }
-      return value;
-    }
-  },
   computed: {
     totalItems() {
       return this.list.length;
@@ -106,6 +106,5 @@ export default {
   created() {
     this.list = this.items.slice();
   },
-  methods: {}
 };
 </script>

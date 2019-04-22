@@ -14,28 +14,26 @@ import axios from "@/axios.js";
 
 export default {
   name: "UserPage",
-  data: () => ({
-    items: []
-  }),
   components: {
     UserList: () => import("@/components/UserList.vue")
   },
+  data: () => ({
+    items: []
+  }),
   computed: {
     getNumberOfUsers() {
-      if (this.items) {
-        return this.items.length;
-      }
-      return "";
+      let numberOfUsers = this.items ? this.items.length : "";
+      return numberOfUsers
+    }
+  },
+  watch: {
+    items() {
+      console.log("Данные загружены");
+      console.log(this.items);
     }
   },
   created() {
     this.loadData();
-  },
-  watch: {
-    items(newValue) {
-      console.log("Данные загружены");
-      console.log(newValue);
-    }
   },
   methods: {
     loadData() {

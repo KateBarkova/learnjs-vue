@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div id="navbarCollapse" class="collapse navbar-collapse">
         <ul class="navbar-nav mr-auto">
           <router-link
             to="/"
@@ -17,7 +17,6 @@
             tag="li"
             class="nav-item"
             active-class="active"
-            exact
           >
             <a class="nav-link">Users</a>
           </router-link>
@@ -26,7 +25,6 @@
             tag="li"
             class="nav-item"
             active-class="active"
-            exact
           >
             <a class="nav-link">Add users</a>
           </router-link>

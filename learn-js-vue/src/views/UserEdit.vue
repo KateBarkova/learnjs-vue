@@ -5,35 +5,26 @@
       Идет загрузка данных...
     </div>
     <user-form v-else v-model="user" />
-    <button type="button" @click="saveUser" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" @click="saveUser">
       Сохранить
     </button>
-    <button type="button" @click="deleteUser" class="btn btn-primary">
+    <button type="button" class="btn btn-primary" @click="deleteUser">
       Удалить
     </button>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.btn-primary {
-  margin: 15px;
-}
-</style>
 
 <script>
 import axios from "@/axios.js";
 
 export default {
   name: "UserEdit",
-  data: () => ({
-    user: null
-  }),
   components: {
     UserForm: () => import("@/components/UserForm.vue")
   },
-  mounted() {
-    this.loadUser();
-  },
+  data: () => ({
+    user: null
+  }),
   computed: {
     id() {
       return this.$route.params.id;
@@ -41,6 +32,9 @@ export default {
     url() {
       return `/users/${this.id}`;
     }
+  },
+  mounted() {
+    this.loadUser();
   },
   methods: {
     loadUser() {
@@ -50,7 +44,7 @@ export default {
           this.user = response.data;
         })
         .catch(error => {
-          console.err(error);
+          console.error(error);
         });
     },
     saveUser() {
@@ -60,7 +54,7 @@ export default {
           this.$router.push("/users");
         })
         .catch(error => {
-          console.err(error);
+          console.error(error);
         });
     },
     deleteUser() {
@@ -70,9 +64,15 @@ export default {
           this.$router.push("/users");
         })
         .catch(error => {
-          console.err(error);
+          console.error(error);
         });
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.btn-primary {
+  margin: 15px;
+}
+</style>

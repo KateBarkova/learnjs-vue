@@ -23,7 +23,7 @@ export default {
   computed: {
     getNumberOfUsers() {
       let numberOfUsers = this.items ? this.items.length : "";
-      return numberOfUsers
+      return numberOfUsers;
     }
   },
   watch: {

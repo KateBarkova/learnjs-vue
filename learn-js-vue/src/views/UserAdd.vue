@@ -2,18 +2,10 @@
   <div>
     <h3>Добавить нового пользователя</h3>
     <user-form v-model="user" />
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="createUser"
-    >
+    <button type="button" class="btn btn-primary" @click="createUser">
       Сохранить
     </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="exit"
-    >
+    <button type="button" class="btn btn-primary" @click="exit">
       Вернуться без сохранения
     </button>
   </div>

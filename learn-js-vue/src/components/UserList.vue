@@ -105,6 +105,6 @@ export default {
   },
   created() {
     this.list = this.items.slice();
-  },
+  }
 };
 </script>

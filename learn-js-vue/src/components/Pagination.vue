@@ -77,6 +77,6 @@ export default {
     selectPage(page) {
       this.$emit("input", page);
     }
-  },
+  }
 };
 </script>

@@ -1,5 +1,15 @@
 <template>
   <div>
+    <div class="form-group">
+      <div class="col-md-2">
+        <list-per-page v-model.number="rowsPerPage" />
+      </div>
+      <div class="col-md-4">
+        <p class="form-control-static">
+          Элементов на странице {{ rowsPerPage }}
+        </p>
+      </div>
+    </div>
     <table class="table">
       <tr>
         <td>
@@ -24,24 +34,36 @@
           <b>Edit</b>
         </td>
       </tr>
-      <tr v-for="item in items" :key="item.id">
+      <tr v-for="item in filteredRows" :key="item.id">
         <td>{{ item.id }}</td>
         <td>{{ item.firstName | toUpperCase(item.surname) }}</td>
-        <td>{{ item.lastName  | toUpperCase(item.surname) }}</td>
+        <td>{{ item.lastName | toUpperCase(item.surname) }}</td>
         <td>{{ item.company }}</td>
         <td>{{ item.email }}</td>
         <td>{{ item.phone }}</td>
         <td>
-          <button type="button"><router-link :to="`/edit/${item.id}`">Edit user</router-link></button>
+          <button type="button">
+            <router-link :to="`/edit/${item.id}`">Edit user</router-link>
+          </button>
         </td>
       </tr>
     </table>
+
+    <pagination
+      v-model.number="selectedPage"
+      :per-page="rowsPerPage"
+      :total="totalItems"
+    />
   </div>
 </template>
 
 <script>
 export default {
   name: "UserList",
+  components: {
+    Pagination: () => import("@/components/Pagination.vue"),
+    ListPerPage: () => import("@/components/ListPerPage.vue")
+  },
   props: {
     items: {
       type: Array,
@@ -49,6 +71,10 @@ export default {
     }
   },
   data: () => ({
+    list: [],
+    rowsPerPage: 5,
+    selectedPage: 1,
+    loading: false
   }),
   filters: {
     toUpperCase(value) {
@@ -59,8 +85,27 @@ export default {
       return value;
     }
   },
-  methods: {
- 
-  }
-}
+  computed: {
+    totalItems() {
+      return this.list.length;
+    },
+    filteredRows() {
+      return this.list.filter((item, index) => {
+        const startIndex = (this.selectedPage - 1) * this.rowsPerPage;
+        const finalIndex = startIndex + this.rowsPerPage;
+
+        return startIndex <= index && index < finalIndex;
+      });
+    }
+  },
+  watch: {
+    rowsPerPage() {
+      this.selectedPage = 1;
+    }
+  },
+  created() {
+    this.list = this.items.slice();
+  },
+  methods: {}
+};
 </script>

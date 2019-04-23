@@ -21,6 +21,14 @@
             <a class="nav-link">Users</a>
           </router-link>
           <router-link
+            to="/phones"
+            tag="li"
+            class="nav-item"
+            active-class="active"
+          >
+            <a class="nav-link">Phones</a>
+          </router-link>
+          <router-link
             to="/add"
             tag="li"
             class="nav-item"

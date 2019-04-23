@@ -17,6 +17,11 @@ export default new Router({
       component: () => import("@/views/Users.vue")
     },
     {
+      path: "/phones",
+      name: "phones",
+      component: () => import("@/views/Phones.vue")
+    },
+    {
       path: "/edit/:id",
       name: "edit",
       component: () => import("@/views/UserEdit.vue")

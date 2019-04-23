@@ -10,42 +10,34 @@
         </p>
       </div>
     </div>
-    <table class="table">
-      <tr>
-        <td>
-          <b>id</b>
-        </td>
-        <td>
-          <b>FirstName</b>
-        </td>
-        <td>
-          <b>LastName</b>
-        </td>
-        <td>
-          <b>Company</b>
-        </td>
-        <td>
-          <b>Email</b>
-        </td>
-        <td>
-          <b>Phone</b>
-        </td>
-        <td>
-          <b>Edit</b>
-        </td>
-      </tr>
+    <table class="table table-srriped">
+      <thead>
+        <slot name="table-header">
+          <tr>
+            <td>id</td>
+            <td>FirstName</td>
+            <td>LastName</td>
+            <td>Company</td>
+            <td>Email</td>
+            <td>Phone</td>
+            <td>Edit</td>
+          </tr>
+        </slot>
+      </thead>
       <tr v-for="item in filteredRows" :key="item.id">
-        <td>{{ item.id }}</td>
-        <td>{{ item.firstName | toUpperCase(item.surname) }}</td>
-        <td>{{ item.lastName | toUpperCase(item.surname) }}</td>
-        <td>{{ item.company }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.phone }}</td>
-        <td>
-          <button type="button">
-            <router-link :to="`/edit/${item.id}`">Edit user</router-link>
-          </button>
-        </td>
+        <slot name="table-row" :item="item">
+          <td>{{ item.id }}</td>
+          <td>{{ item.firstName | toUpperCase(item.surname) }}</td>
+          <td>{{ item.lastName | toUpperCase(item.surname) }}</td>
+          <td>{{ item.company }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.phone }}</td>
+          <td>
+            <button type="button">
+              <router-link :to="`/edit/${item.id}`">Edit user</router-link>
+            </button>
+          </td>
+        </slot>
       </tr>
     </table>
 

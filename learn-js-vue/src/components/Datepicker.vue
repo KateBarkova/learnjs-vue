@@ -16,9 +16,9 @@ export default {
       required: true
     }
   },
-  data: () => {
-    null;
-  },
+  data: () => ({
+    fp: null
+  }),
   watch: {
     value: "updateDatepicker"
   },

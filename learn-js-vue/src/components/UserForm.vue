@@ -2,7 +2,17 @@
   <div>
     <div class="form-group">
       <label>Имя</label>
-      <input v-model="localUser.firstName" type="text" class="form-control" />
+      <input
+        v-model="localUser.firstName"
+        v-validate="'required'"
+        type="text"
+        :class="{ 'is-invalid': errors.has('firstName') }"
+        class="form-control"
+        name="firstName"
+      />
+      <div v-show="errors.has('firstName')" class="invalid-feedback">
+        {{ errors.first("firstName") }}
+      </div>
     </div>
 
     <div class="form-group">
@@ -45,16 +55,13 @@
       <img
         v-else
         :src="localUser.picture"
+        class="img-thumbnail"
         width="128px"
         height="128px"
         alt="Фото"
       />
     </div>
-
-    <div class="form-group">
-      <label>Url фото</label>
-      <input v-model="localUser.picture" type="text" class="form-control" />
-    </div>
+    <avatar-uploader v-model="localUser.picture" />
 
     <div class="form-group">
       <label>О пользователе</label>
@@ -85,8 +92,10 @@
 <script>
 export default {
   name: "UserForm",
+  inject: ["$validator"],
   components: {
-    Datepicker: () => import("@/components/Datepicker.vue")
+    Datepicker: () => import("@/components/Datepicker.vue"),
+    AvatarUploader: () => import("@/components/AvatarUploader")
   },
   model: {
     prop: "user"

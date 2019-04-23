@@ -48,6 +48,11 @@ export default {
         });
     },
     saveUser() {
+      this.$validator.validateAll();
+      if (this.errors.any()) {
+        alert("Problems");
+        return;
+      }
       axios
         .patch(this.url, this.user)
         .then(() => {

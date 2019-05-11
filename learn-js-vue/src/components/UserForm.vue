@@ -23,6 +23,7 @@
         v-validate="'required'"
         :class="{ 'is-invalid': errors.has('lastName') }"
         class="form-control"
+        name="lastName"
       />
       <div v-show="errors.has('lastName')" class="invalid-feedback">
         {{ errors.first("lastName") }}
@@ -57,6 +58,7 @@
         v-validate="'required'"
         :class="{ 'is-invalid': errors.has('email') }"
         class="form-control"
+        name="email"
       />
       <div v-show="errors.has('email')" class="invalid-feedback">
         {{ errors.first("email") }}

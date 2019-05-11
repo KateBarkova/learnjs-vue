@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p>Количество пользователей - {{ getNumberOfUsers }}</p>
     <div class="form-group">
       <div class="col-md-2">
         <list-per-page v-model.number="rowsPerPage" />
@@ -50,6 +51,8 @@
 </template>
 
 <script>
+import axios from "@/axios.js";
+
 export default {
   name: "UserList",
   components: {
@@ -63,12 +66,6 @@ export default {
         return value.toUpperCase();
       }
       return value;
-    }
-  },
-  props: {
-    items: {
-      type: Array,
-      required: true
     }
   },
   data: () => ({
@@ -88,6 +85,17 @@ export default {
 
         return startIndex <= index && index < finalIndex;
       });
+    },
+    getNumberOfUsers() {
+      let numberOfUsers = this.list ? this.list.length : "";
+      return numberOfUsers;
+    },
+    getUrl() {
+      let url = `/users`;
+      if (this.selectedPage && this.rowsPerPage) {
+       url =  `${url}?_page=${this.selectedPage}&_limit=${this.rowsPerPage}`
+      }
+      return url
     }
   },
   watch: {
@@ -96,7 +104,18 @@ export default {
     }
   },
   created() {
-    this.list = this.items.slice();
+    this.loadData();
+  },
+  methods: {
+    loadData() {
+      axios.get("/users").then(response => {
+        this.list = response.data;
+      });
+      axios.get(this.getUrl).then(response => {
+        console.log(response.data);
+      });
+    },
+
   }
 };
 </script>

@@ -17,12 +17,21 @@
 
     <div class="form-group">
       <label>Фамилия</label>
-      <input v-model="localUser.lastName" type="text" class="form-control" />
+      <input
+        v-model="localUser.lastName"
+        type="text"
+        v-validate="'required'"
+        :class="{ 'is-invalid': errors.has('lastName') }"
+        class="form-control"
+      />
+      <div v-show="errors.has('lastName')" class="invalid-feedback">
+        {{ errors.first("lastName") }}
+      </div>
     </div>
 
     <div class="form-group">
       <label>Возраст</label>
-      <input v-model="localUser.age" type="text" class="form-control" />
+      <input v-model="localUser.age" type="number" class="form-control" />
     </div>
 
     <div class="form-group">
@@ -37,12 +46,21 @@
 
     <div class="form-group">
       <label>Телефон</label>
-      <input v-model="localUser.phone" type="text" class="form-control" />
+      <input v-model="localUser.phone" type="phone" class="form-control" />
     </div>
 
     <div class="form-group">
       <label>Email</label>
-      <input v-model="localUser.email" type="text" class="form-control" />
+      <input
+        v-model="localUser.email"
+        type="email"
+        v-validate="'required'"
+        :class="{ 'is-invalid': errors.has('email') }"
+        class="form-control"
+      />
+      <div v-show="errors.has('email')" class="invalid-feedback">
+        {{ errors.first("email") }}
+      </div>
     </div>
 
     <div class="form-group">
@@ -50,17 +68,6 @@
       <input v-model="localUser.address" type="text" class="form-control" />
     </div>
 
-    <div class="form__image-container">
-      <p v-if="!localUser.picture">Нет фото</p>
-      <img
-        v-else
-        :src="localUser.picture"
-        class="img-thumbnail"
-        width="128px"
-        height="128px"
-        alt="Фото"
-      />
-    </div>
     <avatar-uploader v-model="localUser.picture" />
 
     <div class="form-group">
@@ -123,14 +130,3 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.form__image-container {
-  width: 128px;
-  height: 128px;
-  background-color: #828282;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-}
-</style>
